@@ -29,7 +29,15 @@
       </div>
     </div>
     <div class="center_box">
-
+      <div class="current_day_num digital">{{currentDayNum}}</div>
+      <img class="appeal_center_icon1" src="../../assets/images/appeal/appeal_center_icon1.png" alt="">
+      <img class="appeal_center_icon2" src="../../assets/images/appeal/appeal_center_icon2.png" alt="">
+      <div class="appeal_center_box appeal_center_box1"><span>转派诉求</span><span class="digital">34.9<b>%</b></span></div>
+      <div class="appeal_center_box appeal_center_box2"><span>当场解答</span><span class="digital">65.8<b>%</b></span></div>
+      <div v-for="(item,index) in centerList" class="item_box" :key="index" :class="'item_box'+index">
+        <div class="digital">{{item.num}}<b>%</b></div>
+        <div v-html="item.name"></div>
+      </div>
     </div>
     <div class="right_box">
       <div class="top_box">
@@ -46,13 +54,29 @@
           </div>
         </div>
       </div>
+      <div class="bottom_box">
+        <div class="title">委办局</div>
+        <div class="content">
+          <ul>
+            <li v-for="(item,index) in entrustList" :key="index">
+              <span>TOP{{index+1}}</span>
+              <span>{{item.name}}</span>
+              <Progress class="flex-1" color="blue" percent="45.04"/>
+              <span class="right_box">{{item.num}}</span>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Progress from '@/components/Progress'
 export default {
   components: {
+    Progress
   },
   data() {
     return {
@@ -78,7 +102,22 @@ export default {
         { name: '葛店开发区', num: 308 },
         { name: '临空经济区', num: 273 }
       ],
-      problemTotal: 1031218
+      problemTotal: 1031218,
+      entrustList: [
+        { name: 'XXXXXX单位', num: 2452 },
+        { name: 'XXXXXX单位', num: 2452 },
+        { name: 'XXXXXX单位', num: 2452 },
+        { name: 'XXXXXX单位', num: 2452 },
+        { name: 'XXXXXX单位', num: 2452 }
+      ],
+      centerList: [
+        { name: '12345<br />语音', num: 59 },
+        { name: '网站', num: 59 },
+        { name: '你呼<br />我应', num: 59 },
+        { name: '省平台', num: 59 },
+        { name: '微信<br />公众号', num: 59 }
+      ],
+      currentDayNum: 2945068
     };
   }
 }
@@ -149,6 +188,9 @@ ul{
               &:nth-of-type(2){
                 font-size: 36px;
                 color: #ffffff;
+                b{
+                  font-weight: normal;
+                }
               }
             }
           }
@@ -214,6 +256,105 @@ ul{
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: bottom;
+    position: relative;
+    .current_day_num{
+      position: absolute;
+      bottom: 89px;
+      width: 253px;
+      height: 70px;
+      text-align: center;
+      line-height: 70px;
+      font-size: 50px;
+      color: #fbf666;
+      left:-10px;
+      right: 0;
+      margin: 0 auto;
+    }
+    .appeal_center_icon1{
+      position: absolute;
+      bottom: 482px;
+      left: 190px;
+    }
+    .appeal_center_icon2{
+      position: absolute;
+      bottom: 444px;
+      left: 305px;
+    }
+    .appeal_center_box{
+      position: absolute;
+      color: #ffffff;
+      transform: rotate(-8deg);
+      >span{
+        &:nth-of-type(1){
+          font-size: 20px;
+          margin-right: 30px;
+        }
+        &:nth-of-type(2){
+          font-size: 28px;
+          b{
+            font-size: 20px;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+    .appeal_center_box1{
+      bottom: 505px;
+      left: 247px;
+    }
+    .appeal_center_box2{
+      bottom: 466px;
+      left: 356px;
+    }
+    .item_box{
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      div{
+        &:nth-of-type(1){
+          color: #fbf666;
+          font-size: 38px;
+          margin-bottom: 10px;
+          b{
+            font-weight: normal;
+            font-size: 24px;
+          }
+        }
+        &:nth-of-type(2){
+          width: 108px;
+          height: 124px;
+          background-image: url(../../assets/images/appeal/appeal_center_top_bg.png);
+          background-size: 100%;
+          background-repeat: no-repeat;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+          color: #75bffe;
+          text-align: center;
+        }
+      }
+      &.item_box0{
+        bottom: 511px;
+      }
+      &.item_box1{
+        bottom: 685px;
+        left: 106px;
+      }
+      &.item_box2{
+        bottom: 763px;
+        left: 314px;
+      }
+      &.item_box3{
+        bottom: 685px;
+        left: 536px;
+      }
+      &.item_box4{
+        bottom: 500px;
+        right: 9px;
+      }
+    }
   }
   >.right_box{
     flex: 1;
@@ -227,7 +368,7 @@ ul{
       .content{
         margin-top: 40px;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         .content_left{
           width: 328px;
           height: 309px;
@@ -236,9 +377,88 @@ ul{
           background-repeat: no-repeat;
         }
         .content_right{
-
+          padding-top: 23px;
+          ul{
+            li{
+              line-height: 1;
+              span{
+                &:nth-of-type(1){
+                  font-size: 15px;
+                  color: #a8c4dc;
+                }
+                &:nth-of-type(2){
+                  font-size: 20px;
+                  color: #ffffff;
+                }
+              }
+              &:nth-of-type(1){
+                margin-bottom: 58px;
+              }
+              &:nth-of-type(2){
+                margin-bottom: 53px;
+              }
+              &:nth-of-type(3){
+                margin-bottom: 39px;
+              }
+              &:nth-of-type(4){
+                margin-bottom: 29px;
+              }
+            }
+          }
         }
       } 
+    }
+    .bottom_box{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .title{
+        padding-left: 78px;
+        font-size: 20px;
+        color: #ffffff;
+        margin-top: 37px;
+        margin-bottom: 31px;
+      }
+      .content{
+        display: flex;
+        justify-content: center;
+        ul{
+          li{
+            width: 434px;
+            margin-bottom: 30px;
+            padding-left: 23px;
+            height: 57px;
+            display: flex;
+            align-items: center;
+            &:nth-child(odd){
+              background-image: url(../../assets/images/appeal/appeal_right_bottom_border.png);
+              background-size: 100% 100%;
+              background-repeat: no-repeat;
+            }
+            >span{
+              &:nth-of-type(1){
+                font-size: 15px;
+                color: #ffffff;
+              }
+              &:nth-of-type(2){
+                width: 140px;
+                padding: 0 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 15px;
+                color: #75bffe;
+              }
+              &.right_box{
+                width: 98px;
+                text-align: center;
+                font-size: 18px;
+                color: #ffffff;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
