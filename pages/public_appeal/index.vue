@@ -124,24 +124,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url(../../assets/styles/introduce);
 ul{
   list-style: none;
 }
 .appeal_box{
   display: flex;
   align-items: flex-start;
-  .common_title{
-      width: 389px;
-      height: 20px;
-      background-image: url(../../assets/images/appeal/appeal_left_title.png);
-      background-size: 389px 15px;
-      background-repeat: no-repeat;
-      background-position: center;
-      text-align: center;
-      font-size: 20px;
-      color: #ffffff;
-      line-height: 1;
-  }
   >.left_box{
     padding-top: 55px;
     margin-left: 68px;
@@ -154,7 +143,7 @@ ul{
       width: 513px;
       height: 135px;
       background-image: url(../../assets/images/appeal/appeal_top_border.png);
-      background-size: 100% 100%;
+      .bgCover();
       margin-bottom: 43px;
       .title{
         width: 100%;
@@ -253,8 +242,7 @@ ul{
     width: 749px;
     height: 100%;
     background-image: url(../../assets/images/appeal/appeal_center_bottom_bg.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
+    .bgCover();
     background-position: bottom;
     position: relative;
     .current_day_num{
@@ -325,8 +313,7 @@ ul{
           width: 108px;
           height: 124px;
           background-image: url(../../assets/images/appeal/appeal_center_top_bg.png);
-          background-size: 100%;
-          background-repeat: no-repeat;
+          .bgCover();
           display: flex;
           align-items: center;
           justify-content: center;
@@ -373,8 +360,7 @@ ul{
           width: 328px;
           height: 309px;
           background-image: url(../../assets/images/appeal/appeal_right_top_bg.png);
-          background-size: 100%;
-          background-repeat: no-repeat;
+          .bgCover();
         }
         .content_right{
           padding-top: 23px;
@@ -432,8 +418,7 @@ ul{
             align-items: center;
             &:nth-child(odd){
               background-image: url(../../assets/images/appeal/appeal_right_bottom_border.png);
-              background-size: 100% 100%;
-              background-repeat: no-repeat;
+              .bgCover();
             }
             >span{
               &:nth-of-type(1){
