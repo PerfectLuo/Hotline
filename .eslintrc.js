@@ -2,7 +2,8 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: false,
+    es6: true
   },
   parserOptions: {
     parser: 'babel-eslint'
@@ -15,8 +16,10 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    "space-before-function-paren":0,
+    'nuxt/no-cjs-in-config': 0,
+    'space-before-function-paren':0,
     'semi': 0,
-    'no-trailing-spaces':0
+    'no-trailing-spaces':0,
+    'indent': 0
   }
 }

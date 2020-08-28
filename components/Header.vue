@@ -44,9 +44,4 @@ export default {
       }
     }
   }
-  .left {
-  }
-  .right {
-
-  }
 </style>
