@@ -2,7 +2,7 @@
   <header>
     <ul class="left">
       <nuxt-link to="/public_appeal">市民诉求</nuxt-link>
-      <nuxt-link to="">绩效分析</nuxt-link>
+      <nuxt-link to="/public_merits">绩效分析</nuxt-link>
     </ul>
     <ul class="right">
       <nuxt-link to="">重点事件</nuxt-link>
