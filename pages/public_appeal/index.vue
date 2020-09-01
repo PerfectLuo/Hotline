@@ -32,7 +32,7 @@
         <div class="common_title">
           受理分析
         </div>
-        <img src="../../assets/images/appeal/explain.png" alt="">
+        <!-- <img src="../../assets/images/appeal/explain.png" alt=""> -->
         <div class="content">
           <div id="myChart" :style="{width: '457px', height: '277px'}" />
         </div>
@@ -41,6 +41,9 @@
     <div class="center_box">
       <div class="current_day_num digital">
         {{ currentDayNum }}
+      </div>
+      <div class="current_day_title">
+        当日数据
       </div>
       <img class="appeal_center_icon1" src="../../assets/images/appeal/appeal_center_icon1.png" alt="">
       <img class="appeal_center_icon2" src="../../assets/images/appeal/appeal_center_icon2.png" alt="">
@@ -148,9 +151,37 @@ export default {
     initEchartsData() {
       const myChart = this.$echarts.init(document.getElementById('myChart'))
       myChart.setOption({
-            // tooltip: {
-            //     trigger: 'axis'
-            // },
+            tooltip: {
+                trigger: 'axis',
+                formatter: params => {
+                  let html = `<span style="color:#75bffe;font-size:15px;">${params[0].name}日</span><br>`
+                  params.forEach(item => {
+                    html += `<div><div style="width:80px;display: inline-block;"><span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${item.color.colorStops ? item.color.colorStops[0].color : item.color};"></span>`
+                      if (item.seriesIndex) {
+                          html += `<span style="margin-right:40px">${item.seriesName}</span></div><span style="width: 41px;display: inline-block;">${(item.value / 100).toFixed(1)}%</span></div>`
+                      } else {
+                        html += `<span style="margin-right:40px">${item.seriesName}</span></div><span style="width: 41px;display: inline-block;">${item.value}</span></div>`
+                      }
+                  })
+                  return `<div style="padding: 0 10px;">${html}</div>`
+                }
+            },
+            legend: {
+              top: 10,
+              itemGap: 20,
+              textStyle: {
+                color: '#a8c4dc',
+                fontSize: 15
+              },
+              data: [{
+                name: '受理量',
+                icon: 'circle'
+              }, {
+                name: '同比'
+              }, {
+                name: '环比'
+              }]
+            },
             grid: {
                 left: '3%',
                 right: '4%',
@@ -192,14 +223,15 @@ export default {
                     name: '受理量',
                     type: 'line',
                     stack: '总量1',
-                    lineStyle: { color: '#66fbf9' },
+                    lineStyle: { color: '#66fbf8' },
                     symbol: 'none',
                     smooth: true,
-                    data: [10, 20, 30, 10, 30, 20, 10, 10, 20, 10, 30, 10],
+                    data: [10, 20, 10, 25, 22, 21, 10, 10, 20, 10, 40, 10],
                     itemStyle: {
                       normal: {
+                        color: '#66fbf8',
                         lineStyle: {
-                          color: '#66fbf9'// 折线的颜色
+                          color: '#66fbf8'// 折线的颜色
                         },
                         areaStyle: {
                           type: 'default',
@@ -215,7 +247,7 @@ export default {
                     symbolSize: 7,
                     stack: '总量2',
                     lineStyle: { color: '#66fbf9' },
-                    data: [220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290],
+                    data: [70, 80, 72, 67, 80, 65, 55, 70, 55, 65, 80, 70],
                     itemStyle: {
                       normal: {
                         color: '#66fbf9', // 折线点的颜色
@@ -232,7 +264,7 @@ export default {
                     symbolSize: 7,
                     stack: '总量3',
                     lineStyle: { color: '#fbf666' },
-                    data: [300, 100, 201, 154, 190, 330, 410, 300, 100, 201, 154, 190],
+                    data: [60, 70, 60, 80, 70, 50, 65, 75, 45, 55, 70, 60],
                     itemStyle: {
                       normal: {
                         color: '#fbf666', // 折线点的颜色
@@ -395,6 +427,16 @@ ul{
       left:-10px;
       right: 0;
       margin: 0 auto;
+    }
+    .current_day_title{
+      position: absolute;
+      left: -15px;
+      right: 0;
+      margin: 0 auto;
+      bottom: 175px;
+      font-size: 24px;
+      color: #75bffe;
+      text-align: center;
     }
     .appeal_center_icon1{
       position: absolute;

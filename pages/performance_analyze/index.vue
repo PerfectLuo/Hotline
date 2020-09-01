@@ -60,7 +60,7 @@
         </div>
         <div class="center_bottom_box">
           <div><span>及时办结率</span><span class="digital">30%</span></div>
-          <div><span>满意度</span><span class="digital">30%</span></div>
+          <div><span>满意度</span><span class="digital">90%</span></div>
         </div>
       </div>
       <div class="right_box">
@@ -149,11 +149,11 @@ export default {
         { name: '临空经济区', num: 10 }
       ],
       otherClass: [
-        { name: '鄂城区', num: 63 },
-        { name: '华容区', num: 21 },
-        { name: '梁子湖区', num: 10 },
-        { name: '葛店开发区', num: 10 },
-        { name: '临空经济区', num: 10 }
+        { name: '鄂城区', num: 269 },
+        { name: '华容区', num: 258 },
+        { name: '梁子湖区', num: 219 },
+        { name: '葛店开发区', num: 269 },
+        { name: '临空经济区', num: 249 }
       ],
       problemTotal: 1031218,
       entrustList: [
@@ -194,13 +194,11 @@ export default {
     initEchartsData() {
       const myChart = this.$echarts.init(document.getElementById('myChart'))
       myChart.setOption({
-            // tooltip: {
-            //     trigger: 'axis'
-            // },
             grid: {
-                left: '3%',
-                right: '5%',
-                bottom: '6%',
+                left: '4%',
+                right: '7%',
+                bottom: '20%',
+                top: '40%',
                 containLabel: true
             },
             toolbox: {
@@ -237,19 +235,34 @@ export default {
                 {
                     name: '同比',
                     type: 'line',
-                    symbolSize: 10,
+                    symbolSize: 33,
                     symbol: 'circle',
                     stack: '总量2',
-                    lineStyle: { color: '#66fbf9' },
-                    data: [1, 182, 2, 234, 3],
+                    markPoint: {
+                      data: [{
+                        name: '',
+                        coord: [0, 100]
+                      }],
+                      symbolSize: 33,
+                      symbol: 'circle',
+                      itemStyle: {
+                        color: 'transparent', // 折线点的颜色
+                        borderColor: '#fbf666',
+                        borderWidth: 3
+                      }
+                    },
+                    data: [100, 80, 60, 40, 65],
                     itemStyle: {
                       normal: {
-                        color: '#66fbf9', // 折线点的颜色
+                        color: 'transparent', // 折线点的颜色
+                        borderColor: '#75bffe',
+                        borderWidth: 3,
                         lineStyle: {
-                        color: '#66fbf9'// 折线的颜色
+                          color: '#75bffe'// 折线的颜色
                         }
                       }
                     }
+                    
                 }
             ]
         });

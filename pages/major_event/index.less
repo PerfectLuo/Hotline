@@ -1,0 +1,147 @@
+.container {
+  padding-top: 50px;
+  padding-left: 60px;
+  padding-right: 86px;
+}
+.left {
+  flex-direction: column;
+  width: 520px;
+  text-align: center;
+  .flex-1 {
+    margin-bottom: 82px;
+    margin-top: 22px;
+    & > div {
+      height: 100%;
+    }
+  }
+}
+.right {
+  width: 528px;
+  flex-direction: column;
+  & > div:first-child {
+    & > div:last-child {
+      height: 328px;
+    }
+  }
+  .flex {
+    flex-direction: column;
+  }
+  table {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    border-collapse: separate;
+    border-spacing: 8px 8px;
+    td:nth-child(1) {
+      width: 130px;
+    }
+    td:nth-child(2) {
+      width: 120px;
+    }
+    td:nth-child(3) {
+      width: 252px;
+    }
+    thead {
+      color: @color1-light;
+      td {
+        padding: 14px 0 2px;
+      }
+      label:first-child {
+        margin-left: 6px;
+      }
+      label:nth-child(2) {
+        margin-left: 42px;
+      }
+      label:nth-child(3) {
+        margin-left: 22px;
+      }
+    }
+    tbody {
+      color: #fff;
+      td {
+        background: @color6;
+        &::nth-child(1), &::nth-child(2) {
+          margin-right: 8px;
+          margin-bottom: 8px;
+        }
+      }
+      & > tr:first-child {
+        td {
+          background: @color5;
+        }
+      }
+      span {
+        padding: 0 28px;
+      }
+    }
+    .maroon {
+      color: @color1-light;
+      height: 31px;
+    }
+    .strong {
+      color: #e9e563;
+    }
+  }
+}
+.center {
+  position: relative;
+  padding-top: 36px;
+  .item {
+    background: url(../../assets/images/major_event/box.png) no-repeat;
+    width: 204px;
+    height: 206px;
+    position: absolute;
+    text-align: center;
+    &:nth-child(1) {
+      left: 40%;
+      & > div {
+        position: inherit;
+        top: -44px;
+        left: 64px;
+      }
+    }
+    &:nth-child(2) {
+      top: 190px;
+      left: 90px;
+      & > div {
+        position: inherit;
+        top: -44px;
+        left: 64px;
+      }
+    }
+    &:nth-child(3) {
+      top: 190px;
+      right: 40px;
+      & > div {
+        position: inherit;
+        top: -44px;
+        left: 46px;
+      }
+    }
+    span {
+      font-size: 26px;
+    }
+    h6 {
+      font-size: 22px;
+      font-weight: normal;
+      color: @color4;
+    }
+    .digital {
+      color: @color2;
+      font-size: 50px;
+      letter-spacing: 1px;
+    }
+  }
+  .bottom {
+    position: absolute;
+    bottom: 104px;
+    width: 96%;
+    margin-left: 4%;
+    text-align: center;
+    h6 {
+      color: #fff;
+      font-size: 38px;
+      font-weight: normal;
+    }
+  }
+}
