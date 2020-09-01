@@ -2,70 +2,91 @@
   <div class="container appeal_box">
     <div class="left_box">
       <div class="top_box">
-        <div class="title">来电分类</div>
+        <div class="title">
+          来电分类
+        </div>
         <div class="content">
           <ul>
             <li v-for="(item,index) in callClass" :key="index">
-              <span>{{item.name}}</span>
-              <span class="digital">{{item.num}}<b>%</b></span>
+              <span>{{ item.name }}</span>
+              <span class="digital">{{ item.num }}<b>%</b></span>
             </li>
           </ul>
         </div>
       </div>
       <div class="center_box">
-        <div class="title common_title">主要涉及问题</div>
+        <div class="title common_title">
+          主要涉及问题
+        </div>
         <div class="content">
           <ul>
             <li v-for="(item,index) in problemClass" :key="index" :class="{'active':index==0}">
-              <span>{{item.name}}</span>
-              <div><span :style="{width:item.num/problemTotal*100+'%'}"></span></div>
-              <span>{{item.num}}</span>
+              <span>{{ item.name }}</span>
+              <div><span :style="{width:item.num/problemTotal*100+'%'}" /></div>
+              <span>{{ item.num }}</span>
             </li>
           </ul>
         </div>
       </div>
       <div class="bottom_box">
-        <div class="common_title">受理分析</div>
+        <div class="common_title">
+          受理分析
+        </div>
+        <img src="../../assets/images/appeal/explain.png" alt="">
+        <div class="content">
+          <div id="myChart" :style="{width: '457px', height: '277px'}" />
+        </div>
       </div>
     </div>
     <div class="center_box">
-      <div class="current_day_num digital">{{currentDayNum}}</div>
+      <div class="current_day_num digital">
+        {{ currentDayNum }}
+      </div>
       <img class="appeal_center_icon1" src="../../assets/images/appeal/appeal_center_icon1.png" alt="">
       <img class="appeal_center_icon2" src="../../assets/images/appeal/appeal_center_icon2.png" alt="">
-      <div class="appeal_center_box appeal_center_box1"><span>转派诉求</span><span class="digital">34.9<b>%</b></span></div>
-      <div class="appeal_center_box appeal_center_box2"><span>当场解答</span><span class="digital">65.8<b>%</b></span></div>
-      <div v-for="(item,index) in centerList" class="item_box" :key="index" :class="'item_box'+index">
-        <div class="digital">{{item.num}}<b>%</b></div>
-        <div v-html="item.name"></div>
+      <div class="appeal_center_box appeal_center_box1">
+        <span>转派诉求</span><span class="digital">34.9<b>%</b></span>
+      </div>
+      <div class="appeal_center_box appeal_center_box2">
+        <span>当场解答</span><span class="digital">65.8<b>%</b></span>
+      </div>
+      <div v-for="(item,index) in centerList" :key="index" class="item_box" :class="'item_box'+index">
+        <div class="digital">
+          {{ item.num }}<b>%</b>
+        </div>
+        <div v-html="item.name" />
       </div>
     </div>
     <div class="right_box">
       <div class="top_box">
-        <div class="common_title">转派诉求处理</div>
+        <div class="common_title">
+          转派诉求处理
+        </div>
         <div class="content">
-          <div class="content_left"></div>
+          <div class="content_left" />
           <div class="content_right">
             <ul>
-            <li v-for="(item,index) in handleList" :key="index" :class="{'active':index==0}">
-              <span>{{item.name}}</span>
-              <span>{{item.num}}</span>
-            </li>
-          </ul>
+              <li v-for="(item,index) in handleList" :key="index" :class="{'active':index==0}">
+                <span>{{ item.name }}</span>
+                <span>{{ item.num }}</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
       <div class="bottom_box">
-        <div class="title">委办局</div>
+        <div class="title">
+          委办局
+        </div>
         <div class="content">
           <ul>
             <li v-for="(item,index) in entrustList" :key="index">
-              <span>TOP{{index+1}}</span>
-              <span>{{item.name}}</span>
-              <Progress class="flex-1" color="blue" percent="45.04"/>
-              <span class="right_box">{{item.num}}</span>
+              <span>TOP{{ index+1 }}</span>
+              <span>{{ item.name }}</span>
+              <Progress class="flex-1" color="blue" percent="45.04" />
+              <span class="right_box">{{ item.num }}</span>
             </li>
           </ul>
-          
         </div>
       </div>
     </div>
@@ -119,6 +140,111 @@ export default {
       ],
       currentDayNum: 2945068
     };
+  },
+  mounted() {
+    this.initEchartsData();
+  },
+  methods: {
+    initEchartsData() {
+      const myChart = this.$echarts.init(document.getElementById('myChart'))
+      myChart.setOption({
+            // tooltip: {
+            //     trigger: 'axis'
+            // },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    // saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['30', '2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22'],
+                show: true,
+                axisLabel: {
+                  show: true,
+                  textStyle: {
+                      color: '#a8c4dc'
+                  }
+                },
+                axisLine: {
+                  show: false
+                },
+                 axisTick: {
+                  show: false
+                }
+            },
+            yAxis: {
+                type: 'value',
+                splitLine: { // 网格线
+                  show: false
+              },
+              show: false
+            },
+            series: [
+                {
+                    name: '受理量',
+                    type: 'line',
+                    stack: '总量1',
+                    lineStyle: { color: '#66fbf9' },
+                    symbol: 'none',
+                    smooth: true,
+                    data: [10, 20, 30, 10, 30, 20, 10, 10, 20, 10, 30, 10],
+                    itemStyle: {
+                      normal: {
+                        lineStyle: {
+                          color: '#66fbf9'// 折线的颜色
+                        },
+                        areaStyle: {
+                          type: 'default',
+                          color: 'rgba(102, 251, 249, .6)'
+                        }
+                      }
+                    }
+                },
+                {
+                    name: '同比',
+                    type: 'line',
+                    symbol: 'circle',
+                    symbolSize: 7,
+                    stack: '总量2',
+                    lineStyle: { color: '#66fbf9' },
+                    data: [220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290],
+                    itemStyle: {
+                      normal: {
+                        color: '#66fbf9', // 折线点的颜色
+                        lineStyle: {
+                        color: '#66fbf9'// 折线的颜色
+                        }
+                      }
+                    }
+                },
+                {
+                    name: '环比',
+                    type: 'line',
+                    symbol: 'circle',
+                    symbolSize: 7,
+                    stack: '总量3',
+                    lineStyle: { color: '#fbf666' },
+                    data: [300, 100, 201, 154, 190, 330, 410, 300, 100, 201, 154, 190],
+                    itemStyle: {
+                      normal: {
+                        color: '#fbf666', // 折线点的颜色
+                        lineStyle: {
+                        color: '#fbf666'// 折线的颜色
+                        }
+                      }
+                    }
+                }
+            ]
+        });
+    }
   }
 }
 </script>
@@ -235,6 +361,18 @@ ul{
             }
           }
         }
+      }
+    }
+    .bottom_box{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      .common_title{
+        margin-bottom: 21px;
+      }
+      >img{
+        margin-bottom: 10px;
       }
     }
   }

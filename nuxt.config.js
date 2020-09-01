@@ -38,7 +38,8 @@ export default {
   */
   plugins: [
     '@/plugins/element-ui',
-    '@/mock'
+    '@/mock',
+    '@/plugins/echarts'
   ],
   /*
   ** Auto import components

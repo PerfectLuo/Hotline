@@ -16,18 +16,18 @@
       <div class="item">
         <div class="middle flex">
           <div>
-            <img src="@/assets/images/index/icon1.png"/>
+            <img src="@/assets/images/index/icon1.png">
             <div>限时办理机制</div>
           </div>
           <div>
             <div class="flex">
-              <span>1个工作日</span><Progress class="flex-1" color="green" percent="11.79"/><span>11.79%</span>
+              <span>1个工作日</span><Progress class="flex-1" color="green" percent="11.79" /><span>11.79%</span>
             </div>
             <div class="flex">
-              <span>3个工作日</span><Progress class="flex-1" color="blue" percent="45.04"/><span>45.04%</span>
+              <span>3个工作日</span><Progress class="flex-1" color="blue" percent="45.04" /><span>45.04%</span>
             </div>
             <div class="flex">
-              <span>5个工作日</span><Progress class="flex-1" color="yellow" percent="90.67"/><span>90.67%</span>
+              <span>5个工作日</span><Progress class="flex-1" color="yellow" percent="90.67" /><span>90.67%</span>
             </div>
           </div>
         </div>
@@ -35,11 +35,10 @@
       <div class="item">
         <div class="bottom flex">
           <div>
-            <img src="@/assets/images/index/icon2.png"/>
+            <img src="@/assets/images/index/icon2.png">
             <div>回访反馈机制</div>
           </div>
-          <div>
-          </div>
+          <div />
         </div>
       </div>
     </div>
@@ -99,14 +98,16 @@
       </div>
     </div>
     <div class="right">
-      <img src="@/assets/images/index/logo.png"/>
+      <img src="@/assets/images/index/logo.png">
       <ul>
         <li>2015年</li>
         <li>2016年</li>
         <li>2017年</li>
         <li>2018年</li>
         <li>2019年</li>
-        <li class="active">2020年</li>
+        <li class="active">
+          2020年
+        </li>
       </ul>
     </div>
   </div>

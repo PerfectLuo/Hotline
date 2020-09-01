@@ -3,66 +3,89 @@
     <div class="subject_box">
       <div class="left_box">
         <div class="left_top_box">
-          <div class="common_title">主要涉及问题</div>
+          <div class="common_title">
+            主要涉及问题
+          </div>
           <div class="content">
             <ul>
               <li v-for="(item,index) in handleList" :key="index" :class="{'active':index==0}">
                 <div :style="{height:item.num/100*118+10+'px'}">
                   <div :style="{bottom:item.num/100*118+10+'px'}">
-                    <span>{{item.num}}%</span>
+                    <span>{{ item.num }}%</span>
                     <img v-if="index!=0" src="../../assets/images/merits/merits_top_left_sb_bg.png" alt="">
                     <img v-if="index==0" src="../../assets/images/merits/merits_top_left_sy_bg.png" alt="">
                   </div>
                 </div>
-                <span>{{item.name}}</span>
+                <span>{{ item.name }}</span>
               </li>
             </ul>
           </div>
         </div>
         <div class="left_center_box">
-          <div class="title common_title">解 决 率</div>
+          <div class="title common_title">
+            解 决 率
+          </div>
           <div class="content">
             <ul>
               <li v-for="(item,index) in solveClass" :key="index" :class="{'active':index==0}">
-                <span>{{item.name}}</span>
-                <div><span :style="{width:item.num/problemTotal*100+'%'}"></span></div>
-                <span>{{item.num}}</span>
+                <span>{{ item.name }}</span>
+                <div><span :style="{width:item.num/problemTotal*100+'%'}" /></div>
+                <span>{{ item.num }}</span>
               </li>
             </ul>
           </div>
         </div>
         <div class="left_bottom_box">
-          <div class="title common_title">延迟办理情况</div>
-        </div>
-    </div>
-    <div class="center_box">
-      <div class="center_center_box">
-        <div>2020年</div>
-        <div>区 政 府</div>
-        <div>委办局</div>
-      </div>
-      <div class="center_bottom_box">
-        <div><span>及时办结率</span><span class="digital">30%</span></div>
-        <div><span>满意度</span><span class="digital">30%</span></div>
-      </div>
-    </div>
-    <div class="right_box">
-      <div class="right_top_box">
-        <div class="common_title">满 意 率</div>
-        <div class="content"></div>
-      </div>
-      <div class="right_bottom_box">
-        <div class="common_title">推诿扯皮</div>
-        <div class="content">
+          <div class="title common_title">
+            延迟办理情况
+          </div>
+          <div class="content">
+            <div id="myChart" :style="{width: '422px', height: '80px'}" />
             <ul>
-              <li v-for="(item,index) in otherClass" :key="index" :class="{'active':index==0}">
-                <span>{{item.name}}</span>
-                <span>{{item.num}}</span>
+              <li v-for="(item,index) in delayClass" :key="index" :class="{'active':index==0}">
+                <div>
+                  <span>{{ item.num }}</span>
+                </div>
+                <span>{{ item.name }}</span>
               </li>
             </ul>
           </div>
+        </div>
       </div>
-    </div>
+      <div class="center_box">
+        <div class="center_center_box">
+          <div>2020年</div>
+          <div>区 政 府</div>
+          <div>委办局</div>
+        </div>
+        <div class="center_bottom_box">
+          <div><span>及时办结率</span><span class="digital">30%</span></div>
+          <div><span>满意度</span><span class="digital">30%</span></div>
+        </div>
+      </div>
+      <div class="right_box">
+        <div class="right_top_box">
+          <div class="common_title">
+            满 意 率
+          </div>
+          <div class="content">
+            <div />
+          </div>
+        </div>
+        <div class="right_bottom_box">
+          <div class="common_title">
+            推诿扯皮
+          </div>
+          <div class="content">
+            <ul>
+              <li v-for="(item,index) in otherClass" :key="index" :class="{'active':index==0}">
+                <span>{{ item.name }}</span>
+                <span>{{ item.num }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -126,8 +149,83 @@ export default {
         { name: '梁子湖区', num: 26009 },
         { name: '葛店开发区', num: 24260 },
         { name: '临空经济区', num: 24260 }
+      ],
+      delayClass: [
+        { name: '鄂城区', num: 1234 },
+        { name: '华容区', num: 1234 },
+        { name: '梁子湖区', num: 1234 },
+        { name: '葛店开发区', num: 1234 },
+        { name: '临空经济区', num: 1234 }
       ]
     };
+  },
+  mounted() {
+    this.initEchartsData();
+  },
+  methods: {
+    initEchartsData() {
+      const myChart = this.$echarts.init(document.getElementById('myChart'))
+      myChart.setOption({
+            // tooltip: {
+            //     trigger: 'axis'
+            // },
+            grid: {
+                left: '3%',
+                right: '5%',
+                bottom: '6%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    // saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['1', '2', '3', '4', '5'],
+                show: true,
+                axisLabel: {
+                  show: false,
+                  textStyle: {
+                      color: '#a8c4dc'
+                  }
+                },
+                axisLine: {
+                  show: false
+                },
+                 axisTick: {
+                  show: false
+                }
+            },
+            yAxis: {
+                type: 'value',
+                splitLine: { // 网格线
+                  show: false
+              },
+              show: false
+            },
+            series: [
+                {
+                    name: '同比',
+                    type: 'line',
+                    symbolSize: 10,
+                    symbol: 'circle',
+                    stack: '总量2',
+                    lineStyle: { color: '#66fbf9' },
+                    data: [1, 182, 2, 234, 3],
+                    itemStyle: {
+                      normal: {
+                        color: '#66fbf9', // 折线点的颜色
+                        lineStyle: {
+                        color: '#66fbf9'// 折线的颜色
+                        }
+                      }
+                    }
+                }
+            ]
+        });
+    }
   }
 }
 </script>
@@ -280,6 +378,51 @@ ul{
         .common_title{
           margin-top: 33px;
           margin-right: 74px;
+          margin-bottom: 30px;
+        }
+        .content{
+          margin-right: 74px;
+          position: relative;
+          >div{
+            position: relative;
+            z-index: 1;
+          }
+          >ul{
+            position: absolute;
+            left: 3%;
+            top: 0;
+            right: 5%;
+            width: 100%;
+            display: flex;
+            li{
+              width: 89px;
+              &:nth-last-of-type(1){
+                margin-right: -12px;
+              }
+              >div{
+                width: 66px;
+                height: 123px;
+                background-color: rgba(18, 59, 94, .7);
+                border-radius: 3px;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                color: #ffffff;
+                font-size: 18px;
+                padding-bottom: 10px;
+                margin-bottom: 16px;
+              }
+              >span{
+                font-size: 15px;
+                color: #a8c4dc;
+              }
+              &:nth-of-type(1){
+                >div{
+                  background-color: rgba(58, 57, 40, .7);
+                }
+              }
+            }
+          }
         }
         
       }
