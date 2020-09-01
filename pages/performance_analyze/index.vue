@@ -69,7 +69,35 @@
             满 意 率
           </div>
           <div class="content">
-            <div />
+            <div class="content_left_box">
+              <div class="left_top_item">
+                <div class="content_box" :style="{width:'77px',height:'90px'}">
+                  <span>33%</span><span>鄂城区</span>
+                </div>
+              </div>
+              <div class="left_bottom_item">
+                <div class="content_box" :style="{width:'92px',height:'108px'}">
+                  <span>47%</span><span>梁子湖区</span>
+                </div>
+              </div>
+            </div> 
+            <div class="content_center_box">
+              <div class="content_box active">
+                <span>97%</span><span>葛店开发区</span>
+              </div>
+            </div> 
+            <div class="content_right_box">
+              <div class="right_top_item">
+                <div class="content_box" :style="{width:'67px',height:'78px'}">
+                  <span>28%</span><span>华容区</span>
+                </div>
+              </div>
+              <div class="right_bottom_item">
+                <div class="content_box" :style="{width:'119px',height:'139px'}">
+                  <span>64.5%</span><span>临空经济区</span>
+                </div>
+              </div>
+            </div> 
           </div>
         </div>
         <div class="right_bottom_box">
@@ -499,6 +527,57 @@ ul{
         }
         .content{
           height: 359px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 96%;
+          >div{
+            flex: 1;
+          }
+          .content_box{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            background-image:url(../../assets/images/merits/merits_right_top_icon2.png);
+            .bgCover();
+            &.active{
+              background-image:url(../../assets/images/merits/merits_right_top_icon1.png);
+            }
+            span{
+              &:nth-of-type(1){
+                color: #ffffff;
+              }
+              &:nth-of-type(2){
+                color: #a8c4dc;
+              }
+            }
+          }
+          .content_left_box{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            .left_top_item{
+              margin-bottom: 29px;
+            }
+          }
+          .content_center_box{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            >div{
+              width: 186px;
+              height: 216px;
+            }
+          }
+          .content_right_box{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .right_top_item{
+              margin-bottom: 29px;
+            }
+          }
         }
       }
       .right_bottom_box{
