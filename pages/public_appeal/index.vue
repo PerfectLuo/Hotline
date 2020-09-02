@@ -86,7 +86,7 @@
             <li v-for="(item,index) in entrustList" :key="index">
               <span>TOP{{ index+1 }}</span>
               <span>{{ item.name }}</span>
-              <Progress class="flex-1" color="blue" percent="45.04" />
+              <Progress class="flex-1" color="blue" :percent="item.num/5000*100" />
               <span class="right_box">{{ item.num }}</span>
             </li>
           </ul>
@@ -128,7 +128,7 @@ export default {
       ],
       problemTotal: 1031218,
       entrustList: [
-        { name: 'XXXXXX单位', num: 2452 },
+        { name: 'XXXXXX单位', num: 100 },
         { name: 'XXXXXX单位', num: 2452 },
         { name: 'XXXXXX单位', num: 2452 },
         { name: 'XXXXXX单位', num: 2452 },
