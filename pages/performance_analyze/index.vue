@@ -192,6 +192,7 @@ export default {
   },
   methods: {
     initEchartsData() {
+      const that = this;
       const myChart = this.$echarts.init(document.getElementById('myChart'))
       myChart.setOption({
             grid: {
@@ -243,7 +244,7 @@ export default {
                     markPoint: {
                       data: [{
                         name: '',
-                        coord: [0, 1234]
+                        coord: [0, that.delayClass[0].num]
                       }],
                       symbolSize: 33,
                       symbol: 'circle',
@@ -253,7 +254,7 @@ export default {
                         borderWidth: 3
                       }
                     },
-                    data: [1234, 1221, 1134, 1109, 1204],
+                    data: [that.delayClass[0].num, that.delayClass[1].num, that.delayClass[2].num, that.delayClass[3].num, that.delayClass[4].num],
                     itemStyle: {
                       normal: {
                         color: 'transparent', // 折线点的颜色
