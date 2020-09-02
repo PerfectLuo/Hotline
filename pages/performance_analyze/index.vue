@@ -180,9 +180,9 @@ export default {
       ],
       delayClass: [
         { name: '鄂城区', num: 1234 },
-        { name: '华容区', num: 1221 },
-        { name: '梁子湖区', num: 1134 },
-        { name: '葛店开发区', num: 1109 },
+        { name: '华容区', num: 10 },
+        { name: '梁子湖区', num: 1500 },
+        { name: '葛店开发区', num: 0 },
         { name: '临空经济区', num: 1204 }
       ]
     };
@@ -198,8 +198,8 @@ export default {
             grid: {
                 left: '5%',
                 right: '5%',
-                bottom: '40%',
-                top: '40%',
+                bottom: '0%',
+                top: '0%',
                 containLabel: true
             },
             toolbox: {
@@ -231,8 +231,8 @@ export default {
                   show: false
               },
               show: false,
-              min:'dataMin',
-              max:'dataMax'
+              min:'0',
+              max:'2000'
             },
             series: [
                 {
