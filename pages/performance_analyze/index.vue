@@ -9,8 +9,8 @@
           <div class="content">
             <ul>
               <li v-for="(item,index) in handleList" :key="index" :class="{'active':index==0}">
-                <div :style="{height:item.num/100*118+10+'px'}">
-                  <div :style="{bottom:item.num/100*118+10+'px'}">
+                <div :style="{height:item.num/100*80+0+'px'}">
+                  <div :style="{bottom:item.num/100*80+0+'px'}">
                     <span>{{ item.num }}%</span>
                     <img v-if="index!=0" src="../../assets/images/merits/merits_top_left_sb_bg.png" alt="">
                     <img v-if="index==0" src="../../assets/images/merits/merits_top_left_sy_bg.png" alt="">
@@ -142,9 +142,9 @@ export default {
         { name: '工时假期', num: 14752 }
       ],
       handleList: [
-        { name: '鄂城区', num: 63 },
-        { name: '华容区', num: 21 },
-        { name: '梁子湖区', num: 10 },
+        { name: '鄂城区', num: 100 },
+        { name: '华容区', num: 50 },
+        { name: '梁子湖区', num: 0 },
         { name: '葛店开发区', num: 10 },
         { name: '临空经济区', num: 10 }
       ],
@@ -179,11 +179,11 @@ export default {
         { name: '临空经济区', num: 24260 }
       ],
       delayClass: [
-        { name: '鄂城区', num: 1234 },
-        { name: '华容区', num: 1234 },
-        { name: '梁子湖区', num: 1234 },
-        { name: '葛店开发区', num: 1234 },
-        { name: '临空经济区', num: 1234 }
+        { name: '鄂城区', num: 100 },
+        { name: '华容区', num: 80 },
+        { name: '梁子湖区', num: 60 },
+        { name: '葛店开发区', num: 40 },
+        { name: '临空经济区', num: 65 }
       ]
     };
   },
