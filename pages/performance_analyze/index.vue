@@ -179,11 +179,11 @@ export default {
         { name: '临空经济区', num: 24260 }
       ],
       delayClass: [
-        { name: '鄂城区', num: 100 },
-        { name: '华容区', num: 80 },
-        { name: '梁子湖区', num: 60 },
-        { name: '葛店开发区', num: 40 },
-        { name: '临空经济区', num: 65 }
+        { name: '鄂城区', num: 1234 },
+        { name: '华容区', num: 1221 },
+        { name: '梁子湖区', num: 1134 },
+        { name: '葛店开发区', num: 1109 },
+        { name: '临空经济区', num: 1204 }
       ]
     };
   },
@@ -195,9 +195,9 @@ export default {
       const myChart = this.$echarts.init(document.getElementById('myChart'))
       myChart.setOption({
             grid: {
-                left: '4%',
-                right: '7%',
-                bottom: '20%',
+                left: '5%',
+                right: '5%',
+                bottom: '40%',
                 top: '40%',
                 containLabel: true
             },
@@ -229,7 +229,9 @@ export default {
                 splitLine: { // 网格线
                   show: false
               },
-              show: false
+              show: false,
+              min:'dataMin',
+              max:'dataMax'
             },
             series: [
                 {
@@ -241,7 +243,7 @@ export default {
                     markPoint: {
                       data: [{
                         name: '',
-                        coord: [0, 100]
+                        coord: [0, 1234]
                       }],
                       symbolSize: 33,
                       symbol: 'circle',
@@ -251,7 +253,7 @@ export default {
                         borderWidth: 3
                       }
                     },
-                    data: [100, 80, 60, 40, 65],
+                    data: [1234, 1221, 1134, 1109, 1204],
                     itemStyle: {
                       normal: {
                         color: 'transparent', // 折线点的颜色
@@ -437,6 +439,10 @@ ul{
             display: flex;
             li{
               width: 89px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
               &:nth-last-of-type(1){
                 margin-right: -12px;
               }
