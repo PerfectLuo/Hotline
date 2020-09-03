@@ -2,31 +2,29 @@ import Mock from 'mockjs'
 // const Random = Mock.Random
 // 查询各分类工单统计
 Mock.mock(/\/screen\/queryWpTypeNum/,  {
-    "resultCode":'0',
-    "d": {
-        "wpTypeNumList": [
-            {
-                "wpTypeNum": 3115,
-                "nodename": "咨询类"
-            },
-            {
-                "wpTypeNum": 1358,
-                "nodename": "投诉类"
-            },
-            {
-                "wpTypeNum": 593,
-                "nodename": "紧急类"
-            }
-        ],
-        "wpDayTotal": 5357,
-        "turnWpNum": 741,
-        "answerWpNum": 3460
-    },
-    "r": 1,
-    "m": "操作成功"
+  "d": {
+    "wpTypeNumList": [
+      {
+        "wpTypeNum": 3115,
+        "nodename": "咨询类"
+      },
+      {
+        "wpTypeNum": 1358,
+        "nodename": "投诉类"
+      },
+      {
+        "wpTypeNum": 593,
+        "nodename": "紧急类"
+      }
+    ],
+    "wpDayTotal": 5357,
+    "turnWpNum": 741,
+    "answerWpNum": 3460
+  },
+  "r": 1,
+  "m": "操作成功"
 })
 Mock.mock(/\/screen\/queryWpClassNum/,  {
-    "resultCode":'0',
     "d": [
         {
             "classWpNum": 114,
@@ -39,13 +37,28 @@ Mock.mock(/\/screen\/queryWpClassNum/,  {
         {
             "classWpNum": 21,
             "nodename": "转接政务中心"
-        }
+        },
+      {
+        "classWpNum": 65,
+        "nodename": "门前三包区域"
+      },
+      {
+        "classWpNum": 135,
+        "nodename": "无效来电"
+      },
+      {
+        "classWpNum": 48,
+        "nodename": "交通违章"
+      },
+      {
+        "classWpNum": 21,
+        "nodename": "转接政务中心"
+      }
     ],
     "r": 1,
     "m": "操作成功"
 })
 Mock.mock(/\/screen\/queryAreaAndUnitsNum/,  {
-    "resultCode":'0',
     "d": {
         "wpAreaNumList": [
             {
@@ -61,9 +74,22 @@ Mock.mock(/\/screen\/queryAreaAndUnitsNum/,  {
                 "wpAreaNum": 98
             },
             {
-                "wpAreaName": "琼山区",
-                "wpAreaNum": 1
-            }
+                "wpAreaName": "鄂城区",
+                "wpAreaNum": 576
+            },
+          {
+            "wpAreaName": "华容区",
+            "wpAreaNum": 286
+          },
+          {
+            "wpAreaName": "梁子湖区",
+            "wpAreaNum": 98
+          },
+          {
+            "wpAreaName": "航空经济区",
+            "wpAreaNum": 1
+          }
+
         ],
          "wpUnitsNumList": [
             {
@@ -80,39 +106,47 @@ Mock.mock(/\/screen\/queryAreaAndUnitsNum/,  {
             },
             {
                 "wpUnitsName": "琼山区卫生局",
-                "wpUnitsNum": 1
-            }
+                "wpUnitsNum": 46
+            },
+           {
+             "wpUnitsName": "市文化局",
+             "wpUnitsNum": 45
+           },
+           {
+             "wpUnitsName": "市环保局",
+             "wpUnitsNum": 46
+           }
         ]
     },
     "r": 1,
     "m": "操作成功"
 })
 Mock.mock(/\/screen\/querySourceWpNum/,  {
-    "resultCode":'0',
-    "d": {
-        "sourceWpNumList": [
-            {
-                "nodename": "语音",
-                "sourceWpNum": 1306
-            },
-            {
-                "nodename": "微信",
-                "sourceWpNum": 116
-            },
-            {
-                "nodename": "公众号",
-                "sourceWpNum": 29
-            },
-            {
-                "nodename": "省疫情防控",
-                "sourceWpNum": 0
-            }
-        ],
-        "wpDayTotal": 1508
-    },
-    "r": 1,
-    "m": "操作成功"
+  "d": {
+    "sourceWpNumList": [
+      {
+        "nodename": "语音",
+        "sourceWpNum": 1306
+      },
+      {
+        "nodename": "微信",
+        "sourceWpNum": 116
+      },
+      {
+        "nodename": "公众号",
+        "sourceWpNum": 29
+      },
+      {
+        "nodename": "省疫情防控",
+        "sourceWpNum": 0
+      }
+    ],
+    "wpDayTotal": 1508
+  },
+  "r": 1,
+  "m": "操作成功"
 })
+
 Mock.mock(/\/screen\/acceptanceStatistics/,  {
     "resultCode":'0',
     "d": {

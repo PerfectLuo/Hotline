@@ -110,13 +110,7 @@ export default {
       problemTotal: 1,
       wpUnitsNumList: [],
       wpUnitsNumListTotal:1,
-      sourceWpNumList: [
-        { name: '12345<br />语音', num: 59 },
-        { name: '网站', num: 59 },
-        { name: '你呼<br />我应', num: 59 },
-        { name: '省平台', num: 59 },
-        { name: '微信<br />公众号', num: 59 }
-      ],
+      sourceWpNumList: [],
       currentDayNum: 0,
       wpDayTotal:1,
       turnWpNum:0,
@@ -283,32 +277,12 @@ export default {
             ],
             series: [
                 {
-                    name: '受理量',
-                    type: 'line',
-                    stack: '总量1',
-                    lineStyle: { color: '#66fbf8' },
-                    symbol: 'none',
-                    smooth: true,
-                    data: that.acceptance,
-                    itemStyle: {
-                      normal: {
-                        color: 'transparent',
-                        lineStyle: {
-                          color: 'transparent'// 折线的颜色
-                        },
-                        areaStyle: {
-                          type: 'default',
-                          color: 'rgba(102, 251, 249, .3)'
-                        }
-                      }
-                    }
-                },
-                {
                     name: '同比',
                     type: 'line',
                     symbol: 'circle',
                     symbolSize: 7,
                     stack: '总量2',
+                    yAxisIndex: 0,
                     lineStyle: { color: '#66fbf9' },
                     data: that.mmList,
                     itemStyle: {
@@ -325,7 +299,8 @@ export default {
                     type: 'line',
                     symbol: 'circle',
                     symbolSize: 7,
-                    stack: '总量3',
+                    stack: '总量2',
+                    yAxisIndex: 1,
                     lineStyle: { color: '#fbf666' },
                     data: that.yyList,
                     itemStyle: {
@@ -333,6 +308,28 @@ export default {
                         color: '#fbf666', // 折线点的颜色
                         lineStyle: {
                         color: '#fbf666'// 折线的颜色
+                        }
+                      }
+                    }
+                },
+                {
+                    name: '受理量',
+                    type: 'line',
+                    stack: '总量1',
+                    lineStyle: { color: '#66fbf8' },
+                    symbol: 'none',
+                    smooth: true,
+                    yAxisIndex: 1,
+                    data: that.acceptance,
+                    itemStyle: {
+                      normal: {
+                        color: 'transparent',
+                        lineStyle: {
+                          color: 'transparent'// 折线的颜色
+                        },
+                        areaStyle: {
+                          type: 'default',
+                          color: 'rgba(102, 251, 249, .3)'
                         }
                       }
                     }
