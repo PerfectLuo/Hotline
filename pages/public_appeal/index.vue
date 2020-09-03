@@ -40,7 +40,7 @@
     </div>
     <div class="center_box">
       <div class="current_day_num digital">
-        {{ currentDayNum }}
+        {{ wpDayTotal }}
       </div>
       <div class="current_day_title">
         当日数据
@@ -53,7 +53,7 @@
       <div class="appeal_center_box appeal_center_box2">
         <span>当场解答</span><span class="digital">{{ (answerWpNum/wpDayTotal*100).toFixed(1)}}<b>%</b></span>
       </div>
-      <div v-for="(item,index) in sourceWpNumList" :key="index" class="item_box" :class="'item_box'+index">
+      <div v-for="(item,index) in sourceWpNumList" :key="index" class="item_box" :class="'item_box'+index+sourceWpNumList.length">
         <div class="digital">
           {{ (item.sourceWpNum/currentDayNum*100).toFixed(0) }}<b>%</b>
         </div>
