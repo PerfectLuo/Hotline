@@ -120,7 +120,12 @@ export default {
       currentDayNum: 0,
       wpDayTotal:1,
       turnWpNum:0,
-      answerWpNum:0
+      answerWpNum:0,
+      acceptanceStatisticsData:{},
+      mmList:[],
+      dateList:[],
+      yyList:[],
+      acceptance:[]
     };
   },
   created() {
@@ -130,9 +135,34 @@ export default {
     this.querySourceWpNum();
   },
   mounted() {
-    this.initEchartsData();
+    this.acceptanceStatistics();
   },
   methods: {
+    async acceptanceStatistics() {
+      const secondMonthNum = [];
+      const firstMonthNum = [];
+      const lastYearFirstMonthNum = [];
+      const dateList = [];
+      const acceptanceStatistics = await this.$axios.get('/screen/acceptanceStatistics')
+      const acceptanceStatisticsData = acceptanceStatistics.data.d;
+      acceptanceStatisticsData.secondMonthNum.forEach(value => {
+        this.dateList.push(value.startTime.substr(value.startTime.length - 2, value.startTime))
+        dateList.push(value.startTime)
+        secondMonthNum.push(value.dayNum)
+      })
+      acceptanceStatisticsData.firstMonthNum.forEach(value => {
+        firstMonthNum.push(value.dayNum)
+      })
+      acceptanceStatisticsData.lastYearFirstMonthNum.forEach(value => {
+        lastYearFirstMonthNum.push(value.dayNum)
+      })
+      dateList.forEach((value, index) => {
+        this.mmList.push(parseInt(firstMonthNum[index]) - parseInt(secondMonthNum[index]))
+        this.yyList.push(parseInt(lastYearFirstMonthNum[index]) - parseInt(secondMonthNum[index]))
+        this.acceptance.push(secondMonthNum[index])
+      })
+      this.initEchartsData();
+    },
     async queryWpTypeNumData() {
       const queryWpTypeNum = await this.$axios.get('/screen/queryWpTypeNum')
       const queryWpTypeNumData = queryWpTypeNum.data.d;
@@ -169,6 +199,7 @@ export default {
       // })
     },
     initEchartsData() {
+      const that = this;
       const myChart = this.$echarts.init(document.getElementById('myChart'))
       myChart.setOption({
             tooltip: {
@@ -217,7 +248,7 @@ export default {
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: ['30', '2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22'],
+                data: that.dateList,
                 show: true,
                 axisLabel: {
                   show: true,
@@ -232,13 +263,24 @@ export default {
                   show: false
                 }
             },
-            yAxis: {
+            yAxis: [
+              {
+                name:'同比/环比',
                 type: 'value',
                 splitLine: { // 网格线
                   show: false
               },
               show: false
-            },
+              },
+              {
+                name:'受理量',
+                type: 'value',
+                splitLine: { // 网格线
+                  show: false
+              },
+              show: false
+              }
+            ],
             series: [
                 {
                     name: '受理量',
@@ -247,7 +289,7 @@ export default {
                     lineStyle: { color: '#66fbf8' },
                     symbol: 'none',
                     smooth: true,
-                    data: [10, 20, 10, 25, 22, 21, 10, 10, 20, 10, 40, 10],
+                    data: that.acceptance,
                     itemStyle: {
                       normal: {
                         color: 'transparent',
@@ -268,7 +310,7 @@ export default {
                     symbolSize: 7,
                     stack: '总量2',
                     lineStyle: { color: '#66fbf9' },
-                    data: [70, 80, 72, 67, 80, 65, 55, 70, 55, 65, 80, 70],
+                    data: that.mmList,
                     itemStyle: {
                       normal: {
                         color: '#66fbf9', // 折线点的颜色
@@ -285,7 +327,7 @@ export default {
                     symbolSize: 7,
                     stack: '总量3',
                     lineStyle: { color: '#fbf666' },
-                    data: [60, 70, 60, 80, 70, 50, 65, 75, 45, 55, 70, 60],
+                    data: that.yyList,
                     itemStyle: {
                       normal: {
                         color: '#fbf666', // 折线点的颜色
