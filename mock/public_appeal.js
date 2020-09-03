@@ -2,6 +2,7 @@ import Mock from 'mockjs'
 // const Random = Mock.Random
 // 查询各分类工单统计
 Mock.mock(/\/screen\/queryWpTypeNum/,  {
+    "resultCode":'0',
     'r': 1,
     'm': 'SUCCESS',
     'd': {
