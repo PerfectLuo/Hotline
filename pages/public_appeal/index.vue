@@ -48,16 +48,16 @@
       <img class="appeal_center_icon1" src="../../assets/images/appeal/appeal_center_icon1.png" alt="">
       <img class="appeal_center_icon2" src="../../assets/images/appeal/appeal_center_icon2.png" alt="">
       <div class="appeal_center_box appeal_center_box1">
-        <span>转派诉求</span><span class="digital">34.9<b>%</b></span>
+        <span>转派诉求</span><span class="digital">{{ (turnWpNum/wpDayTotal*100).toFixed(1)}}<b>%</b></span>
       </div>
       <div class="appeal_center_box appeal_center_box2">
-        <span>当场解答</span><span class="digital">65.8<b>%</b></span>
+        <span>当场解答</span><span class="digital">{{ (answerWpNum/wpDayTotal*100).toFixed(1)}}<b>%</b></span>
       </div>
-      <div v-for="(item,index) in centerList" :key="index" class="item_box" :class="'item_box'+index">
+      <div v-for="(item,index) in sourceWpNumList" :key="index" class="item_box" :class="'item_box'+index">
         <div class="digital">
-          {{ item.num }}<b>%</b>
+          {{ (item.sourceWpNum/currentDayNum*100).toFixed(0) }}<b>%</b>
         </div>
-        <div v-html="item.name" />
+        <div>{{item.nodename}}</div>
       </div>
     </div>
     <div class="right_box">
@@ -110,21 +110,24 @@ export default {
       problemTotal: 1,
       wpUnitsNumList: [],
       wpUnitsNumListTotal:1,
-      centerList: [
+      sourceWpNumList: [
         { name: '12345<br />语音', num: 59 },
         { name: '网站', num: 59 },
         { name: '你呼<br />我应', num: 59 },
         { name: '省平台', num: 59 },
         { name: '微信<br />公众号', num: 59 }
       ],
-      currentDayNum: 2945068,
-      wpDayTotal:1
+      currentDayNum: 0,
+      wpDayTotal:1,
+      turnWpNum:0,
+      answerWpNum:0
     };
   },
   created() {
     this.queryWpTypeNumData();
     this.queryWpClassNumData();
     this.queryAreaAndUnitsNum();
+    this.querySourceWpNum();
   },
   mounted() {
     this.initEchartsData();
@@ -135,6 +138,8 @@ export default {
       const queryWpTypeNumData = queryWpTypeNum.data.d;
       this.wpTypeNumList = queryWpTypeNumData.wpTypeNumList.slice(0, 5)
       this.wpDayTotal = queryWpTypeNumData.wpDayTotal
+      this.turnWpNum = queryWpTypeNumData.turnWpNum
+      this.answerWpNum = queryWpTypeNumData.answerWpNum
     },
     async queryWpClassNumData() {
       const queryWpClassNum = await this.$axios.get('/screen/queryWpClassNum')
@@ -152,6 +157,16 @@ export default {
       this.wpUnitsNumList.forEach(value => {
         this.wpUnitsNumListTotal += value.wpUnitsNum
       })
+    },
+    async querySourceWpNum() {
+      const querySourceWpNum = await this.$axios.get('/screen/querySourceWpNum')
+      const querySourceWpNumData = querySourceWpNum.data.d;
+      this.sourceWpNumList = querySourceWpNumData.sourceWpNumList.slice(0, 5);
+      this.currentDayNum = querySourceWpNumData.wpDayTotal
+      // this.wpUnitsNumList = querySourceWpNumData.wpUnitsNumList.slice(0, 5);
+      // this.wpUnitsNumList.forEach(value => {
+      //   this.wpUnitsNumListTotal += value.wpUnitsNum
+      // })
     },
     initEchartsData() {
       const myChart = this.$echarts.init(document.getElementById('myChart'))

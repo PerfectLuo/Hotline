@@ -87,3 +87,29 @@ Mock.mock(/\/screen\/queryAreaAndUnitsNum/,  {
     "r": 1,
     "m": "操作成功"
 })
+Mock.mock(/\/screen\/querySourceWpNum/,  {
+    "resultCode":'0',
+    "d": {
+        "sourceWpNumList": [
+            {
+                "nodename": "语音",
+                "sourceWpNum": 1306
+            },
+            {
+                "nodename": "微信",
+                "sourceWpNum": 116
+            },
+            {
+                "nodename": "公众号",
+                "sourceWpNum": 29
+            },
+            {
+                "nodename": "省疫情防控",
+                "sourceWpNum": 0
+            }
+        ],
+        "wpDayTotal": 1508
+    },
+    "r": 1,
+    "m": "操作成功"
+})
