@@ -37,6 +37,7 @@ module.exports = {
     'no-mixed-spaces-and-tabs': 0,
     'no-tabs': 0,
     quotes: 0,
-    'quote-props': 0
+    'quote-props': 0,
+    "no-unused-vars":0
   }
 }

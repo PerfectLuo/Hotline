@@ -38,8 +38,10 @@ export default {
   */
   plugins: [
     '@/plugins/element-ui',
-    '@/mock',
-    '@/plugins/echarts'
+    // '@/mock',
+    '@/plugins/echarts',
+    '@/plugins/axios',
+    { src:'@/mock/public_appeal', ssr: true },
   ],
   /*
   ** Auto import components

@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
+const Random = Mock.Random
 
-Mock.mock('/test', 'post', {
+Mock.mock('/screen/queryWpTypeNum', 'post', {
   code: 0,
   message: 'SUCCESS',
   data: [

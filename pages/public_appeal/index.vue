@@ -7,7 +7,7 @@
         </div>
         <div class="content">
           <ul>
-            <li v-for="(item,index) in callClass" :key="index">
+            <li v-for="(item,index) in wpTypeNumList" :key="index">
               <span>{{ item.name }}</span>
               <span class="digital">{{ item.num }}<b>%</b></span>
             </li>
@@ -86,7 +86,7 @@
             <li v-for="(item,index) in entrustList" :key="index">
               <span>TOP{{ index+1 }}</span>
               <span>{{ item.name }}</span>
-              <Progress class="flex-1" color="blue" :percent="item.num/5000*100" />
+              <Progress class="flex-1" color="blue" :percent="(item.num/5000*100).toFixed(2)" />
               <span class="right_box">{{ item.num }}</span>
             </li>
           </ul>
@@ -104,7 +104,7 @@ export default {
   },
   data() {
     return {
-      callClass: [
+      wpTypeNumList: [
         { name: '咨 询 类', num: 63 },
         { name: '投 诉 类', num: 63 },
         { name: '举 报 类', num: 63 },
@@ -144,10 +144,17 @@ export default {
       currentDayNum: 2945068
     };
   },
+  created() {
+    this.initData();
+  },
   mounted() {
     this.initEchartsData();
   },
   methods: {
+    async initData() {
+      const res = await this.$axios.get('/screen/queryWpTypeNum')
+      console.log(res.data.d)
+    },
     initEchartsData() {
       const myChart = this.$echarts.init(document.getElementById('myChart'))
       myChart.setOption({
@@ -175,7 +182,8 @@ export default {
               },
               data: [{
                 name: '受理量',
-                icon: 'circle'
+                icon: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAOCAYAAADNGCeJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ4IDc5LjE2NDAzNiwgMjAxOS8wOC8xMy0wMTowNjo1NyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5QURFRkVFRDA0MTFFQTkzRjBDM0UzNEFFNTQwM0IiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5QURFRkRFRDA0MTFFQTkzRjBDM0UzNEFFNTQwM0IiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MzA4NTYyOEJFQ0VBMTFFQTg5QjhGRDIyRUFFMkU2QjMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzA4NTYyOENFQ0VBMTFFQTg5QjhGRDIyRUFFMkU2QjMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4hVcESAAAAzElEQVR42mJM+/2TgUjABcTfgfg/suBMFjY4m4UIQ3iAWB1N7AIQ/0VXyETAIGMsBoGAARCzkmKYMRKbDYkN840eqS4DATEg/oXE/wMNPxCQJMYwJyT2Kyzy36C0ESHDdIH4I5Ex/AKfYTJo4UMQpP/5xYjNMH4gFmcgHbihGwZyjQoDeeANsmGM0HBigLJJASxQrzrDDIPFCCt6ViEC/IHSH4AGcsMS4H0g/grEzFALkGlmPHwmpDSnATLsLAMFAJTRga7iAzJVAQIMAINcISlNCAe2AAAAAElFTkSuQmCC',
+                color : 'transparent',
               }, {
                 name: '同比'
               }, {
@@ -229,13 +237,13 @@ export default {
                     data: [10, 20, 10, 25, 22, 21, 10, 10, 20, 10, 40, 10],
                     itemStyle: {
                       normal: {
-                        color: '#66fbf8',
+                        color: 'transparent',
                         lineStyle: {
-                          color: '#66fbf8'// 折线的颜色
+                          color: 'transparent'// 折线的颜色
                         },
                         areaStyle: {
                           type: 'default',
-                          color: 'rgba(102, 251, 249, .6)'
+                          color: 'rgba(102, 251, 249, .3)'
                         }
                       }
                     }
@@ -364,7 +372,8 @@ ul{
               }
               &:nth-of-type(2){
                 width: 85px;
-                text-align: right;
+                padding-left: 33px;
+                text-align: left;
                 font-size: 15px;
                 color: #ffffff;
               }
@@ -545,6 +554,7 @@ ul{
         .content_right{
           padding-top: 23px;
           ul{
+            margin-left: 10px;
             li{
               line-height: 1;
               span{

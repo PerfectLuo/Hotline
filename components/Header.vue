@@ -38,7 +38,7 @@ export default {
         line-height: 44px;
         text-align: center;
         text-decoration: none;
-        &.active {
+        &.nuxt-link-exact-active {
           background: url('../assets/images/header/menu2.png') no-repeat;
         }
       }

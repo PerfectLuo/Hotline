@@ -4,7 +4,7 @@
       <div class="left_box">
         <div class="left_top_box">
           <div class="common_title">
-            主要涉及问题
+            及时办结率
           </div>
           <div class="content">
             <ul>
@@ -381,8 +381,9 @@ ul{
                 color: #a8c4dc;
               }
               &:nth-of-type(2){
+                padding-left: 33px;
                 width: 85px;
-                text-align: right;
+                text-align: left;
                 font-size: 15px;
                 color: #ffffff;
               }

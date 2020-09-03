@@ -36,15 +36,14 @@ export default function ({ $axios, redirect }) {
     if (config.status !== 200) {
       // throw new Error(codeMessage[config.status])
       notify(`${config.status}：${codeMessage[config.status]}`)
-    } 
+    } else if (config.data.resultCode !== '0') {
+      notify(`${config.data.resultCode}：${config.data.resultMsg || '服务器繁忙'}`)
+      // throw new Error(config.data.message || '服务器错误')
+    }
     // else if (config.data.resultCode === '1') {
     //   Toast('权限验证已失效，请重新登录')
     //   redirect('/')
     // } 
-    else if (config.data.resultCode !== '0') {
-      notify(`${config.data.resultCode}：${config.data.resultMsg || '服务器繁忙'}`)
-      // throw new Error(config.data.message || '服务器错误')
-    }
   })
   // 异常拦截器
   $axios.onError((error) => {
