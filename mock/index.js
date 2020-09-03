@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-const Random = Mock.Random
+// const Random = Mock.Random
 
 Mock.mock('/screen/queryWpTypeNum', 'post', {
   code: 0,

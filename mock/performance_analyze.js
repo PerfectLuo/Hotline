@@ -1,2 +1,2 @@
 import Mock from 'mockjs'
-const Random = Mock.Random
+// const Random = Mock.Random

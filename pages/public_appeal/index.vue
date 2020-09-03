@@ -69,9 +69,9 @@
           <div class="content_left" />
           <div class="content_right">
             <ul>
-              <li v-for="(item,index) in handleList" :key="index" :class="{'active':index==0}">
-                <span>{{ item.name }}</span>
-                <span>{{ item.num }}</span>
+              <li v-for="(item,index) in wpAreaNumList" :key="index" :class="{'active':index==0}">
+                <span>{{ item.wpAreaName }}</span>
+                <span>{{ item.wpAreaNum }}</span>
               </li>
             </ul>
           </div>
@@ -83,11 +83,11 @@
         </div>
         <div class="content">
           <ul>
-            <li v-for="(item,index) in entrustList" :key="index">
+            <li v-for="(item,index) in wpUnitsNumList" :key="index">
               <span>TOP{{ index+1 }}</span>
-              <span>{{ item.name }}</span>
-              <Progress class="flex-1" color="blue" :percent="(item.num/5000*100).toFixed(2)" />
-              <span class="right_box">{{ item.num }}</span>
+              <span>{{ item.wpUnitsName }}</span>
+              <Progress class="flex-1" color="blue" :percent="(item.wpUnitsNum/wpUnitsNumListTotal*100).toFixed(2)" />
+              <span class="right_box">{{ item.wpUnitsNum }}</span>
             </li>
           </ul>
         </div>
@@ -106,21 +106,10 @@ export default {
     return {
       wpTypeNumList: [],
       problemClass: [],
-      handleList: [
-        { name: '鄂 城 区', num: 576 },
-        { name: '华 容 区', num: 490 },
-        { name: '梁子湖区', num: 416 },
-        { name: '葛店开发区', num: 308 },
-        { name: '临空经济区', num: 273 }
-      ],
+      wpAreaNumList: [],
       problemTotal: 1,
-      entrustList: [
-        { name: 'XXXXXX单位', num: 100 },
-        { name: 'XXXXXX单位', num: 2452 },
-        { name: 'XXXXXX单位', num: 2452 },
-        { name: 'XXXXXX单位', num: 2452 },
-        { name: 'XXXXXX单位', num: 2452 }
-      ],
+      wpUnitsNumList: [],
+      wpUnitsNumListTotal:1,
       centerList: [
         { name: '12345<br />语音', num: 59 },
         { name: '网站', num: 59 },
@@ -133,28 +122,35 @@ export default {
     };
   },
   created() {
-    this.initQueryWpClassNumData();
-    this.initueryWpClassNumData();
+    this.queryWpTypeNumData();
+    this.queryWpClassNumData();
+    this.queryAreaAndUnitsNum();
   },
   mounted() {
     this.initEchartsData();
   },
   methods: {
-    async initQueryWpClassNumData() {
+    async queryWpTypeNumData() {
       const queryWpTypeNum = await this.$axios.get('/screen/queryWpTypeNum')
       const queryWpTypeNumData = queryWpTypeNum.data.d;
       this.wpTypeNumList = queryWpTypeNumData.wpTypeNumList.slice(0, 5)
       this.wpDayTotal = queryWpTypeNumData.wpDayTotal
-
-      const queryWpClassNum = await this.$axios.get('/screen/queryWpClassNum')
-      const queryWpClassNumData = queryWpClassNum.data.d;
     },
-    async initueryWpClassNumData() {
+    async queryWpClassNumData() {
       const queryWpClassNum = await this.$axios.get('/screen/queryWpClassNum')
       const queryWpClassNumData = queryWpClassNum.data.d;
       this.problemClass = queryWpClassNumData.slice(0, 6);
       this.problemClass.forEach(value => {
         this.problemTotal += value.classWpNum
+      })
+    },
+    async queryAreaAndUnitsNum() {
+      const queryAreaAndUnitsNum = await this.$axios.get('/screen/queryAreaAndUnitsNum')
+      const queryAreaAndUnitsNumData = queryAreaAndUnitsNum.data.d;
+      this.wpAreaNumList = queryAreaAndUnitsNumData.wpAreaNumList.slice(0, 5);
+      this.wpUnitsNumList = queryAreaAndUnitsNumData.wpUnitsNumList.slice(0, 5);
+      this.wpUnitsNumList.forEach(value => {
+        this.wpUnitsNumListTotal += value.wpUnitsNum
       })
     },
     initEchartsData() {

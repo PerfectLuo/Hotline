@@ -44,3 +44,46 @@ Mock.mock(/\/screen\/queryWpClassNum/,  {
     "r": 1,
     "m": "操作成功"
 })
+Mock.mock(/\/screen\/queryAreaAndUnitsNum/,  {
+    "resultCode":'0',
+    "d": {
+        "wpAreaNumList": [
+            {
+                "wpAreaName": "龙华区",
+                "wpAreaNum": 315
+            },
+            {
+                "wpAreaName": "秀英区",
+                "wpAreaNum": 286
+            },
+            {
+                "wpAreaName": "美兰区",
+                "wpAreaNum": 98
+            },
+            {
+                "wpAreaName": "琼山区",
+                "wpAreaNum": 1
+            }
+        ],
+         "wpUnitsNumList": [
+            {
+                "wpUnitsName": "市公安局",
+                "wpUnitsNum": 315
+            },
+            {
+                "wpUnitsName": "市公安局交通警察支队",
+                "wpUnitsNum": 286
+            },
+            {
+                "wpUnitsName": "省级单位",
+                "wpUnitsNum": 98
+            },
+            {
+                "wpUnitsName": "琼山区卫生局",
+                "wpUnitsNum": 1
+            }
+        ]
+    },
+    "r": 1,
+    "m": "操作成功"
+})
