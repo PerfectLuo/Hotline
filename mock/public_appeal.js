@@ -3,9 +3,7 @@ import Mock from 'mockjs'
 // 查询各分类工单统计
 Mock.mock(/\/screen\/queryWpTypeNum/,  {
     "resultCode":'0',
-    'r': 1,
-    'm': 'SUCCESS',
-    'd': {
+    "d": {
         "wpTypeNumList": [
             {
                 "wpTypeNum": 3115,
@@ -23,5 +21,26 @@ Mock.mock(/\/screen\/queryWpTypeNum/,  {
         "wpDayTotal": 5357,
         "turnWpNum": 741,
         "answerWpNum": 3460
-    }
-  })
+    },
+    "r": 1,
+    "m": "操作成功"
+})
+Mock.mock(/\/screen\/queryWpClassNum/,  {
+    "resultCode":'0',
+    "d": [
+        {
+            "classWpNum": 114,
+            "nodename": "信息咨询"
+        },
+        {
+            "classWpNum": 65,
+            "nodename": "门前三包区域"
+        },
+        {
+            "classWpNum": 21,
+            "nodename": "转接政务中心"
+        }
+    ],
+    "r": 1,
+    "m": "操作成功"
+})

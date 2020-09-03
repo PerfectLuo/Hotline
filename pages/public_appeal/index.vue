@@ -21,9 +21,9 @@
         <div class="content">
           <ul>
             <li v-for="(item,index) in problemClass" :key="index" :class="{'active':index==0}">
-              <span>{{ item.name }}</span>
-              <div><span :style="{width:item.num/problemTotal*100+'%'}" /></div>
-              <span>{{ item.num }}</span>
+              <span>{{ item.nodename }}</span>
+              <div><span :style="{width:item.classWpNum/problemTotal*100+'%'}" /></div>
+              <span>{{ item.classWpNum }}</span>
             </li>
           </ul>
         </div>
@@ -105,14 +105,7 @@ export default {
   data() {
     return {
       wpTypeNumList: [],
-      problemClass: [
-        { name: '疾控防疫', num: 886491 },
-        { name: '无效来电', num: 61735 },
-        { name: '交通违章', num: 26009 },
-        { name: '网站使用', num: 24260 },
-        { name: '网上购物', num: 17971 },
-        { name: '工时假期', num: 14752 }
-      ],
+      problemClass: [],
       handleList: [
         { name: '鄂 城 区', num: 576 },
         { name: '华 容 区', num: 490 },
@@ -120,7 +113,7 @@ export default {
         { name: '葛店开发区', num: 308 },
         { name: '临空经济区', num: 273 }
       ],
-      problemTotal: 1031218,
+      problemTotal: 1,
       entrustList: [
         { name: 'XXXXXX单位', num: 100 },
         { name: 'XXXXXX单位', num: 2452 },
@@ -140,17 +133,29 @@ export default {
     };
   },
   created() {
-    this.initData();
+    this.initQueryWpClassNumData();
+    this.initueryWpClassNumData();
   },
   mounted() {
     this.initEchartsData();
   },
   methods: {
-    async initData() {
-      const res = await this.$axios.get('/screen/queryWpTypeNum')
-      const data = res.data.d;
-      this.wpTypeNumList = data.wpTypeNumList
-      this.wpDayTotal = data.wpDayTotal
+    async initQueryWpClassNumData() {
+      const queryWpTypeNum = await this.$axios.get('/screen/queryWpTypeNum')
+      const queryWpTypeNumData = queryWpTypeNum.data.d;
+      this.wpTypeNumList = queryWpTypeNumData.wpTypeNumList.slice(0, 5)
+      this.wpDayTotal = queryWpTypeNumData.wpDayTotal
+
+      const queryWpClassNum = await this.$axios.get('/screen/queryWpClassNum')
+      const queryWpClassNumData = queryWpClassNum.data.d;
+    },
+    async initueryWpClassNumData() {
+      const queryWpClassNum = await this.$axios.get('/screen/queryWpClassNum')
+      const queryWpClassNumData = queryWpClassNum.data.d;
+      this.problemClass = queryWpClassNumData.slice(0, 6);
+      this.problemClass.forEach(value => {
+        this.problemTotal += value.classWpNum
+      })
     },
     initEchartsData() {
       const myChart = this.$echarts.init(document.getElementById('myChart'))
